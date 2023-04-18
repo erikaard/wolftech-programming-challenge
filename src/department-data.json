@@ -88,4 +88,15 @@
     "Title" : "France",
     "Color" : "#EB5F25",
     "DepartmentParent_OID" : 10
-    }]
+    },{
+        "OID" : 123,
+        "Title" : "Tokyo",
+        "Color" : "#EB5F25",
+        "DepartmentParent_OID" : 118
+        },{
+            "OID" : 1234,
+            "Title" : "Shop",
+            "Color" : "#EB5F25",
+            "DepartmentParent_OID" : 118
+            }
+]
