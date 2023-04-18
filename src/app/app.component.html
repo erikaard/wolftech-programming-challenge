@@ -1,2 +1,6 @@
 <app-department></app-department>
-<router-outlet> </router-outlet>
+<div style="margin: 20px;">
+  <app-test [departments]="buildDepartmentHierarchy(departments)" [preSelectedIds]="preSelectedIds" (selectedIds)="onSelectedIdsChanged($event)">
+  </app-test>
+  <p>Selected departments: {{ selectedIds }}</p>
+</div>

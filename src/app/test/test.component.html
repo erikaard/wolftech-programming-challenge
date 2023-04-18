@@ -1,0 +1,27 @@
+<div class="container">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <div class="leaf">
+        <span class="color-line" [style.background-color]="node.Color"></span>
+      {{node.Title}}
+      <ng-container *ngIf="!node.expandable">
+        <button mat-icon-button  (click)="toggleSelection(node)" [attr.aria-label]="'toggle ' + node.Title">
+          <mat-icon *ngIf="isSelected(node)">check_box</mat-icon>
+          <mat-icon *ngIf="!isSelected(node)">check_box_outline_blank</mat-icon>
+        </button>
+      </ng-container>
+      </div>
+    </mat-tree-node>
+    
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+      <button mat-icon-button  matTreeNodeToggle>
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <span class="color-line" [style.background-color]="node.Color"></span>
+      {{node.Title}}
+      <span class="counters" *ngIf="node.expandable">({{node.selectedLeafs}}/{{node.totalLeafs}})</span>
+    </mat-tree-node>
+  </mat-tree>
+</div>

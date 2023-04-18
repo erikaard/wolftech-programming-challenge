@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import departmentsData from 'src/department-data.json';
 
 interface Department {
@@ -15,6 +15,7 @@ interface Department {
 })
 
 export class DepartmentComponent {
+
   departments: Department[] = departmentsData;
 
   selectedDepartments: number[] = [];
@@ -48,6 +49,7 @@ export class DepartmentComponent {
       }, 0);
     }
   }
+
   countSelectedLeafNodes(department: Department): number {
     if (this.isLeaf(department)) {
       return this.selectedDepartments.includes(department.OID) ? 1 : 0;
@@ -65,11 +67,16 @@ export class DepartmentComponent {
     const totalLeafNodes = this.countLeafNodes(department);
     const selectedLeafNodes = this.countSelectedLeafNodes(department);
 
-    return `${selectedLeafNodes}/${totalLeafNodes} `;
+    return `${selectedLeafNodes}/${totalLeafNodes}`;
   }
+
   getSubDepartments(department: Department) {
     return this.departments.filter(
       (d) => d.DepartmentParent_OID === department.OID
     );
   }
+  handleClick($event: Event) {
+  }
+  
 }
+

@@ -1,35 +1,38 @@
 <h1>Departments</h1>
 
-
-<ul>
-    <ng-container *ngFor="let department of departments">
-      <ng-container *ngIf="department.DepartmentParent_OID === null">
-        <li>
-          <span [style.color]="department.Color">{{ department.Title }}</span>
-          <span *ngIf="!isLeaf(department)">({{ getLeafNodeCount(department) }})</span>
-        </li>
+<ul id="#myUL">
+  <ng-container *ngFor="let department of departments">
+    <ng-container *ngIf="department.DepartmentParent_OID === null">
+      <li>
+        <span [style.color]="department.Color">{{ department.Title }}</span>
+        <span *ngIf="!isLeaf(department)">({{ getLeafNodeCount(department) }})</span>
+        <ul >
         <ng-container *ngFor="let subDepartment of getSubDepartments(department)">
-          <ul>
-            <input type="checkbox" [checked]="selectedDepartments.includes(subDepartment.OID)"
-              (change)="onDepartmentSelect($event, subDepartment)">
-            <span [style.color]="subDepartment.Color">{{ subDepartment.Title }}</span>
-            <span *ngIf="!isLeaf(subDepartment)">({{ getLeafNodeCount(subDepartment) }})</span>
-            <ng-container *ngIf="!isLeaf(subDepartment)">
-              <ul>
-                <ng-container *ngFor="let subSubDepartment of getSubDepartments(subDepartment)">
-                  <li>
-                    <input type="checkbox" [checked]="selectedDepartments.includes(subSubDepartment.OID)"
-                      (change)="onDepartmentSelect($event, subSubDepartment)">
-                    <span [style.color]="subSubDepartment.Color">{{ subSubDepartment.Title }}</span>
-                    <span *ngIf="!isLeaf(subSubDepartment)">({{ getLeafNodeCount(subSubDepartment) }})</span>
-                  </li>
-                </ng-container>
-              </ul>
-            </ng-container>
-          </ul>
-        </ng-container>
-      </ng-container>
+            <li>
+              <input type="checkbox" [checked]="selectedDepartments.includes(subDepartment.OID)"
+                (change)="onDepartmentSelect($event, subDepartment)">
+              <span [style.color]="subDepartment.Color">{{ subDepartment.Title }}</span>
+              <span *ngIf="!isLeaf(subDepartment)">({{ getLeafNodeCount(subDepartment) }})</span>
+              <ng-container *ngIf="!isLeaf(subDepartment)">
+                <ul >
+                  <ng-container *ngFor="let subSubDepartment of getSubDepartments(subDepartment)">
+                    <li>
+                      <input type="checkbox" [checked]="selectedDepartments.includes(subSubDepartment.OID)"
+                        (change)="onDepartmentSelect($event, subSubDepartment)">
+                      <span [style.color]="subSubDepartment.Color">{{ subSubDepartment.Title }}</span>
+                      <span *ngIf="!isLeaf(subSubDepartment)">({{ getLeafNodeCount(subSubDepartment) }})</span>
+                    </li>
+                  </ng-container>
+                </ul>
+              </ng-container>
+            </li>
+          </ng-container>
+        </ul>
+      </li>
+      
+      
     </ng-container>
-  </ul>
+  </ng-container>
+</ul>
 
-<p>Selected departments: {{ selectedDepartments }}</p>
+
